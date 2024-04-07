@@ -1,0 +1,32 @@
+/*form{
+    margin: auto;
+    border: 2px solid black;
+    display:block ;
+    max-width: 500px;
+    min-width: 80px;
+    background-color: lightblue;
+    
+}
+label{
+    width: fit-content;
+    
+}
+input{
+    display: flex;    
+    margin: auto;
+    width: fit-content;
+    max-width: 45%
+}
+button{
+    margin: 5px auto;
+    border: 1px solid black;
+    width: 10% min-content 50px;
+}
+button:hover{
+    background-color: cadetblue;
+    border-color: cadetblue;
+}
+body{
+    align-items: center;
+}
+*/
