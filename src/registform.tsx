@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { User } from "./user";
 import {Link} from "react-router-dom"
-import Regvalidation from "./validation";
+import Regvalidation from "./Regvalidation";
 function Signup() {
     const[username,setName]=useState("")
     const[email,setemail]=useState("")
