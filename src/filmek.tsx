@@ -1,4 +1,4 @@
 export interface Film{
-    Cim:string
+    title:string
     Hosszperc:number
 }

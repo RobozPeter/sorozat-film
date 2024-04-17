@@ -1,5 +1,5 @@
-import { Evad } from "./evad"
+import { Epizod } from "./epizod"
 export interface Sorozat{
-    Cim:string
-    Evad:Evad[]
+    title:string
+    resz:Epizod[]
 }

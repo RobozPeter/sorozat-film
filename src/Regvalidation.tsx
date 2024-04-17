@@ -12,13 +12,13 @@ async function Regvalidation(name:string,email:string,password:string) {
     }else if(password==""){
         error="A jelszó nem lehet üres"
     }
-    const res=fetch("http://localhost:3000/valname",{
+    /*const res=fetch("http://localhost:3000/valname",{
         method: 'POST',
         body: JSON.stringify(name),
         headers: {
         'Content-type': 'application/json'
       }})
-    console.log((await res).json)
+    console.log((await res).json)*/
     
     
     

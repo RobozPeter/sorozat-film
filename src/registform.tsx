@@ -10,22 +10,23 @@ function Signup() {
 
     async function handleSubmit(event: { preventDefault: () => void; }){
         event.preventDefault();
-        setstatus(await Regvalidation(username,email,password))
+        //setstatus(await Regvalidation(username,email,password))
 
         const value:User={
-            id:0,
+            ID:0,
             username,
             email,
             password,
             filmek:[],
-            sorozatok:[]
+            sorozat:[]
         }
-        const res=await fetch("http://localhost:3000/signup", {
+        await fetch("http://localhost:3000/signup", {
         method: 'POST',
         body: JSON.stringify(value),
         headers: {
         'Content-type': 'application/json'
       }})
+      setstatus("Sikeres felhasználó felvétele")
       
     };
 

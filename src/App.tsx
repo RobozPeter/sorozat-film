@@ -1,6 +1,7 @@
 import { Login } from './loginpage'
 import Signup from './registform' 
-import Homepage from './home'
+import Homepage from './uj'
+import Page from './listingPage'
 import {BrowserRouter, Routes,Route} from "react-router-dom"
 function App() {
   return(
@@ -8,7 +9,8 @@ function App() {
     <Routes>
       <Route path='/' element={<Login/>} ></Route>
       <Route path='/registform' element={<Signup/>} ></Route>
-      <Route path='/home' element={<Homepage/>} ></Route>
+      <Route path='/listingPage' element={<Page/>} ></Route>
+      <Route path='/uj' element={<Homepage/>} ></Route>
       
     </Routes>
     </BrowserRouter>

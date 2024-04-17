@@ -1,10 +1,10 @@
-import { Film } from "./fimek"
+import { Film } from "./filmek"
 import { Sorozat } from "./sorozat"
 export interface User{
-    id: number
+    ID: number
     email: string
     username: string
     password: string
     filmek:Film[]
-    sorozatok: Sorozat[]
+    sorozat: Sorozat[]
 }

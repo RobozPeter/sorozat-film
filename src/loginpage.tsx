@@ -1,10 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom"
 import { User } from './user'
-let user:User
-export function thisUser(){
-  return user
-}
+let user: User[]
 export function Login() {
   const navigate = useNavigate()
   const [name, setname] = useState("")
@@ -17,23 +14,31 @@ export function Login() {
       email: name,
       password: password
     }
-    await fetch("http://localhost:3000/login", {
+    let res = await fetch("http://localhost:3000/login", {
       method: 'POST',
       body: JSON.stringify(values),
       headers: {
         'Content-type': 'application/json'
       }
-    }).then(res => {
-      console.log(res.statusText)
-      if (res.status == 200) {
-        user=res.json as User
-        navigate("/home")
-      } else if (res.status == 201) {
-        setErrors("Hibás név vagy jelszó")
-      } else {
-        setErrors("Szerver oldali hiba")
-      }
     })
+    if (res.status == 200) {
+      user = await res.json() as User[]
+      let ok=await fetch("http://localhost:3000/currentuser", {
+        method: 'POST',
+        body: JSON.stringify(user[0]),
+        headers: {
+          'Content-type': 'application/json'
+        }
+      })
+      if(ok.ok){
+        navigate("/listingPage")
+      }
+    } else if (res.status == 201) {
+      setErrors("Hibás név vagy jelszó")
+    } else {
+      setErrors("Szerver oldali hiba")
+    }
+
   }
 
   return (
@@ -41,7 +46,7 @@ export function Login() {
       <nav>
         <ul className="nav-list">
           <li className="active">
-            <a href="index.html" aria-current="page">Login</a>
+            <Link to="/" className="btn d-block text-decoration-none text-white" aria-current>Login</Link>
           </li>
           <li>
             <Link to="/registform" className="btn d-block text-decoration-none text-white">Register</Link>
