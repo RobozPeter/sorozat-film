@@ -54,10 +54,10 @@ function Page() {
             <div>
             <h1>Filmek:</h1>
                 {
-                    //filmek.map((Film, index) => (<tr key={index}> <td>{Film.Cim}</td> </tr>))
-                    filmek.map(film => (
-                    <tr> <td>{film.title}</td> </tr>
-                    ))
+                    filmek.length==0?(<p>Még nem vettél fel filmet</p>):(filmek.map(film => (
+                        <tr> <td>{film.title}</td> </tr>
+                        )))
+                    
 
                 }
             </div>
@@ -66,26 +66,28 @@ function Page() {
                 <h1>Sorozatok:</h1>
 
                 {
-                    sorozatok.map((sorozat, index) => (
-                        <div>
-                            <h1>{sorozat.title}</h1>
-
-                            <table className="table" key={index}>
-
-                                <tbody>
-                                    
-                                        {sorozat.resz.map((epizod) => (
-                                            <tr>
-
-                                            <td className="text-white">{epizod.epizodszam}</td>
-                                            <td className="text-white">{epizod.cim}</td>
-
-                                            </tr>
-                                        ))}
-                                     
-                                </tbody></table>
-                        </div>
-                    )
+                    sorozatok.length==0?(<p>Még nem vettél fel sorozatott</p>):
+                    (
+                        sorozatok.map((sorozat, index) => (
+                            <div>
+                                <h1>{sorozat.title}</h1>
+    
+                                <table className="table" key={index}>
+    
+                                    <tbody>
+                                        
+                                            {sorozat.resz.map((epizod) => (
+                                                <tr>
+    
+                                                <td className="text-white">{epizod.epizodszam}</td>
+                                                <td className="text-white">{epizod.cim}</td>
+    
+                                                </tr>
+                                            ))}
+                                         
+                                    </tbody></table>
+                            </div>
+                        ))
                     )
                 }
 
