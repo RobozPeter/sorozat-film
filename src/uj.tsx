@@ -1,4 +1,4 @@
-import { FormEvent,useEffect,useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import "./home.css"
 import { Link, useNavigate } from "react-router-dom";
 import { Film } from "./filmek";
@@ -13,9 +13,9 @@ interface InputProps {
 }
 
 function Inputs({ value, onCimChange }: InputProps) {
-    let cimek=[];
+    let cimek = [];
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        cimek[parseInt(event.target.name)]=event.target.value
+        cimek[parseInt(event.target.name)] = event.target.value
         onCimChange(cimek)
     };
 
@@ -35,25 +35,27 @@ function Homepage() {
 
     const [help, setHelp] = useState(false);
     const [cim, setcim] = useState("")
+    const[val,setval]=useState(0)
     let navigate = useNavigate()
-    const [cimek,setcimek]=useState([] as string[])
-    let user={ ID: 0, email: "", username: "", password: "", filmek: [], sorozat: [] } as User
+    const [cimek, setcimek] = useState([] as string[])
+    let user = { ID: 0, email: "", username: "", password: "", filmek: [], sorozat: [] } as User
 
     async function load() {
         let respond = await fetch("http://localhost:3000/currentuser")
-        user=await respond.json() as User
-        
+        user = await respond.json() as User
+
     }
-    useEffect(()=>{
+    useEffect(() => {
         load()
-    },[])
+    }, [])
 
     const handleToggle = () => {
         setHelp(prevHelp => !prevHelp);
     };
 
     const handleChange = (event: { target: { value: string }; }) => {
-        let x=[]
+        let x = []
+        setval(parseInt(event.target.value))
         for (let index = 0; index < parseInt(event.target.value); index++) {
             x.push("")
         }
@@ -99,16 +101,16 @@ function Homepage() {
     }
 
     async function logout() {
-        let igen={ ID: 0, email: "", username: "", password: "", filmek: [], sorozat: [] }
+        let igen = { ID: 0, email: "", username: "", password: "", filmek: [], sorozat: [] }
         await load()
-        await fetch("http://localhost:3000/updateuser",{
+        await fetch("http://localhost:3000/updateuser", {
             method: 'POST',
             body: JSON.stringify(user),
             headers: {
                 'Content-type': 'application/json'
             }
         })
-        
+
         await fetch("http://localhost:3000/currentuser", {
             method: 'POST',
             body: JSON.stringify(igen),
@@ -137,24 +139,37 @@ function Homepage() {
             </nav>
             <main>
                 <div>
-                    <div>
-                    <p className="d-inline">Sorozat</p>
-                    </div>
-                    <div className="form-check form-switch form-check-inline d-inline">
-                    <input className="form-check-input" onChange={handleToggle} type="checkbox" checked={help} role="switch" />
-                    <label>Film</label>
+                    <div className="container">
+                        <div className="row" >
+                            <div className="col text-center" >
+
+                                <label className="align-middle">Sorozat</label>
+                            </div>
+                            <div className="col" >
+
+                                <div className=" form-switch">
+                                    <input className="form-check-input w-100" onChange={handleToggle} type="checkbox" checked={help} role="switch" />
+                                </div>
+                            </div>
+                            <div className="col text-center" >
+
+                                <label className="align-middle text-center" >Film</label>
+                            </div>
+                        </div>
+
                     </div>
                     {help ? (
                         <div>
                             <label>
-                                
+
                             </label>
                             <form onSubmit={(res) => addFilm(res)}>
                                 <p>Film</p>
                                 <label htmlFor="cim"> <p>Cím</p>
                                     <input type="text" placeholder="Film címe" name="cim" value={cim} onChange={e => { setcim(e.currentTarget.value) }} />
                                 </label>
-                                <button>input</button>
+                                <br />
+                                <button className="my-3">Felvesz</button>
                             </form>
                         </div>
                     ) : (
@@ -165,13 +180,13 @@ function Homepage() {
                                 <label htmlFor="cim"> <p>Cím</p>
                                     <input type="text" placeholder="Sorozat címe" name="cim" value={cim} onChange={e => { setcim(e.currentTarget.value) }} />
                                 </label>
-                                <p>1.évad</p>
-                                <label> <p>Részek száma száma</p>
-                                    <input type="number" value={cimek.length} onChange={handleChange} />
+                                <br />
+                                <label> <p>Részek száma:</p>
+                                    <input type="number" value={val} onChange={handleChange}  />
                                 </label>
 
                                 <Inputs value={cimek} onCimChange={setcimek} />
-                                <button id="felvevo">Felvesz</button>
+                                <button className="my-3">Felvesz</button>
                             </form>
                         </div>
                     )}
