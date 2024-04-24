@@ -55,16 +55,17 @@ export function Login() {
       </nav>
       <main>
         <div className="d-flex w-100 vh-100 justify-content-center align-items-center">
+        
           <div className="bg-primary p-3 rounded w-25">
-            <h2>Bejelentkezés</h2>
+            <h2 className='text-center text-break'>Bejelentkezés</h2>
             <form onSubmit={handlesubmit}>
               <div className="mb-3">
-                <label htmlFor="text"><strong>Email</strong>
+                <label htmlFor="text" className='w-100'><strong>Email</strong>
                   <input type="text" placeholder="Enter Email" name='email' className="form-control rounded-0" onChange={e => { setname(e.target.value) }} />
                 </label>
               </div>
               <div className="mb-3">
-                <label htmlFor="password"><strong>Password</strong>
+                <label htmlFor="password" className='w-100'><strong>Password</strong>
                   <input type="password" placeholder="Enter Password" name='password' className="form-control rounded-0" onChange={e => { setpassword(e.target.value) }} />
                 </label>
               </div>
