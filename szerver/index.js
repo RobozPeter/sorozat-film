@@ -19,6 +19,21 @@ app.get('/', async (req, res) => {
     res.send(rows)
 })
 
+app.post('/login',jsonparser, async (req,res)=>{
+    try {
+        const [rows,fields]= await db.query("SELECT * FROM `bejelentkezes` WHERE email=? OR username=?  AND password=?",[req.body.email,req.body.email,req.body.password])
+    if(rows.length>0){
+        res.status(200).send(rows)
+    }else{
+        res.status(201).json("Faile")
+    }
+    } catch (error) {
+        res.status(500).send(error)
+    }
+    
+
+})
+
 
 app.post('/signup', jsonparser, async (req, res) => {
     try {
