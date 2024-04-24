@@ -12,21 +12,31 @@ function Page() {
     const [filmek, setFilm] = useState([] as Film[])
     let navigate = useNavigate()
     let user: User
-    useEffect(() => {
-        async function load() {
-            let respond = await fetch("http://localhost:3000/currentuser")
-            user = await respond.json() as User
-            setFilm(user.filmek)
-            setSorozat(user.sorozat);
+    async function load() {
+        let respond = await fetch("http://localhost:3000/currentuser")
+        user = await respond.json() as User
+        setFilm(user.filmek)
+        setSorozat(user.sorozat);
 
-        }
+    }
+    useEffect(() => {
         load()
     }, [])
     async function logout() {
-        const user2 = { ID: 0, email: "", username: "", password: "", filmek: [], sorozat: [] } as User
+        let igen = { ID: 0, email: "", username: "", password: "", filmek: [], sorozat: [] }
+        await load()
+        let res=await fetch("http://localhost:3000/updateuser", {
+            method: 'POST',
+            body: JSON.stringify(user),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        })
+        console.log(res)
+
         await fetch("http://localhost:3000/currentuser", {
             method: 'POST',
-            body: JSON.stringify(user2),
+            body: JSON.stringify(igen),
             headers: {
                 'Content-type': 'application/json'
             }

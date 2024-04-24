@@ -103,13 +103,14 @@ function Homepage() {
     async function logout() {
         let igen = { ID: 0, email: "", username: "", password: "", filmek: [], sorozat: [] }
         await load()
-        await fetch("http://localhost:3000/updateuser", {
+        let res=await fetch("http://localhost:3000/updateuser", {
             method: 'POST',
             body: JSON.stringify(user),
             headers: {
                 'Content-type': 'application/json'
             }
         })
+        console.log(res)
 
         await fetch("http://localhost:3000/currentuser", {
             method: 'POST',

@@ -2,7 +2,7 @@ import { User } from "./user"
 
 async function Regvalidation(name: string, email: string, password: string) {
     let error = ""
-    const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    /*    const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (name == "") {
         error = "A felhasználó név nem lehet üres"
     } else
@@ -30,23 +30,23 @@ async function Regvalidation(name: string, email: string, password: string) {
         error = "Az email már regisztrálva van"
     }}
     if (error == "") {
-        const value: User = {
-            ID: 0,
-            username:name,
-            email:email,
-            password:password,
-            filmek: [],
-            sorozat: []
-        }
-        await fetch("http://localhost:3000/signup", {
-            method: 'POST',
-            body: JSON.stringify(value),
-            headers: {
-                'Content-type': 'application/json'
-            }
-        })
-        error="Sikeres felhasználó felvétele"
+    }*/
+    const value: User = {
+        ID: 0,
+        username:name,
+        email:email,
+        password:password,
+        filmek: [],
+        sorozat: []
     }
+    await fetch("http://localhost:3000/signup", {
+        method: 'POST',
+        body: JSON.stringify(value),
+        headers: {
+            'Content-type': 'application/json'
+        }
+    })
+    error="Sikeres felhasználó felvétele"
     return error
 }
 
